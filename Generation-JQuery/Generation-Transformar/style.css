@@ -1,0 +1,37 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: url(transformer.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    background: #fff;
+    padding: 45px;
+    box-sizing: border-box;
+    border :1px solid rgba(0,0,0,.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+h1{
+    color: Green;
+}
+
+tr{
+    color:Black;
+}
+
+h3{
+    color:Blue;
+}
+
+

@@ -1,0 +1,198 @@
+<html>
+
+<head>
+
+    <title>Generation</title>
+    <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="includes/javascripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+
+        $(document).ready(function () {
+
+            let i = 1;
+
+            $("#btnAdd").click(function () {
+
+                let newHtml = GetHtml().replace("$[Id]", i++).replace("$[En_id]", $("#txtEn_id").val()).replace("$[Active]", $("#ddlActive option:selected").val()).replace("$[Date]", $("#txtDate").val()).replace("$[Edit]", "Edit").replace("$[Delete]", "Delete");
+
+                $("#table_td").append(newHtml);
+
+            });
+
+
+
+            $("#btnUpdate").click(function () {
+
+                let newHtml = GetHtml().replace("$[Id]", $("#txtId").val()).replace("$[En_id]", $("#txtEn_id").val()).replace("$[Active]", $("#ddlActive option:selected").val()).replace("$[Date]", $("#txtDate").val()).replace("$[Edit]", "Edit").replace("$[Delete]", "Delete");
+
+                $("#table_td").append(newHtml);
+
+                $("#btnAdd").show();
+
+                $("#btnUpdate").hide();
+
+                $("#txtId").val('');
+
+                $("#txtEn_id").val('');
+
+                $("#ddlActive option:selected").val('Select')
+
+                $("#txtDate").val('');
+
+
+
+            });
+
+
+
+            $(document).on("click", "#A_Edit", function () {
+
+                $("#btnAdd").hide();
+
+                $("#btnUpdate").show();
+
+                $("#txtId").show();
+
+                $("#txtId").val($(this).parent().parent().find('.Id').html());
+
+                $("#txtEn_id").val($(this).parent().parent().find('.En_id').html());
+
+                $("#ddlActive option:selected").val($(this).parent().parent().find('.True').html())
+
+                $("#txtDate").val($(this).parent().parent().find('.False').html());
+
+                $(this).parents("tr").remove();
+
+                $("#btnUpdate").focus();
+
+            });
+
+
+
+            $(document).on("click", "#A_delete", function () {
+
+                $(this).parents("tr").remove();
+
+            });
+
+        });
+
+
+
+        function GetHtml() {
+
+            return "<tr><td class='Id'>$[Id]</td>"
+
+                + "<td class='En_id'>$[En_id]</td>"
+
+                + "<td class='Active'>$[Active]</td>"
+
+                + "<td class='Date'>$[Date]</td>"
+
+                + "<td class='action'><a href='#' id='A_Edit'> $[Edit] </a> <a href='#' id='A_delete'>$[Delete]</a></td></tr>";
+
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+<form id="form1">
+<h1>Transformer</h1>
+    <table class='table table-bordered' id='UserInfo'>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>En_id</th>
+
+            <th>Active</th>
+
+            <th>Date</th>
+
+            <th>Action</th>
+
+        </tr>
+
+        <tbody id="table_td"></tbody>
+
+    </table>
+
+    <h3>
+
+        Add New
+
+    </h3>
+
+    <table class='table table-bordered' id='Add'>
+
+        <tr>
+
+            <th>Id</th>
+
+            <th>En_id</th>
+
+            <th>Active</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        <tr>
+
+            <td>
+
+                <input type="text" id="txtId" style="display: none" readonly name="ID" value="" />
+
+            </td>
+
+            <td>
+
+                <input type="text" id="txtEn_id" name="En_id" value="" />
+
+            </td>
+
+            <td>
+
+                <select id="ddlActive">
+
+                    <option value="True">True</option>
+
+                    <option value="False">False</option>
+
+                </select>
+
+            </td>
+
+            <td>
+
+                <input type="text" id="txtDate" name="Date" value="" />
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <input type="button" id="btnAdd" style="display: block" value="Add" />
+
+    <input type="button" id="btnUpdate" style="display: none" value="Update" />
+
+    <br />
+
+    <div id="output"></div>
+
+</form>
+
+</body>
+
+</html>

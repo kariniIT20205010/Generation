@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Generation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Source</h1>
+    <form id="source_form">
+        <div class="form-group">
+            <input type="text" id="form_name" name="" required="">
+            <span class="error_form" id="name_error_message"></span>
+            <label>Name</label>
+        </div>
+        <div>
+            <input type="number" id="form_id" name="" required="">
+            <span class="error_form" id="id_error_message"></span>
+            <label>Id</label>
+        </div>
+        <div>
+            <input type="text" id="form_type" name="" required="">
+            <span class="error_form" id="type_error_message"></span>
+            <label>Type</label>
+        </div>
+        <div>
+            <input type="text" id="form_place" name="" required="">
+            <span class="error_form" id="place_error_message"></span>
+            <label>Place</label>
+        </div>
+        <input type="submit" value="Insert" name="">
+    </form>
+</div>
+<script type="text/javascript">
+    $(function() {
+
+        $("#name_error_message").hide();
+        $("#id_error_message").hide();
+        $("#type_error_message").hide();
+        $("#place_error_message").hide();
+
+        var error_name = false;
+        var error_id = false;
+        var error_type = false;
+        var error_place = false;
+
+        $("#form_name").focusout(function(){
+            check_name();
+        });
+        $("#form_id").focusout(function() {
+            check_id();
+        });
+        $("#form_type").focusout(function() {
+            check_type();
+        });
+        $("#form_place").focusout(function() {
+            check_place();
+        });
+
+        function check_name() {
+            var pattern = /^[a-zA-Z]*$/;
+            var name = $("#form_name").val();
+            if (pattern.test(name) && name !== '') {
+                $("#name_error_message").hide();
+                $("#form_name").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#name_error_message").html("Should contain only Characters");
+                $("#name_error_message").show();
+                $("#form_name").css("border-bottom","2px solid #F90A0A");
+                error_name = true;
+            }
+        }
+
+        function check_id() {
+            var id_length = $("#form_id").val().length;
+            if (id_length < 2) {
+                $("#id_error_message").html("Atleast 2 numbers");
+                $("#id_error_message").show();
+                $("#form_id").css("border-bottom","2px solid #F90A0A");
+                error_id = true;
+            } else {
+                $("#id_error_message").hide();
+                $("#form_id").css("border-bottom","2px solid #34F458");
+            }
+        }
+
+        function check_type() {
+            var pattern = /^[a-zA-Z]*$/;
+            var type = $("#form_type").val();
+            if (pattern.test(type) && type !== '') {
+                $("#type_error_message").hide();
+                $("#form_type").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#type_error_message").html("Should contain only Characters");
+                $("#type_error_message").show();
+                $("#form_type").css("border-bottom","2px solid #F90A0A");
+                error_type = true;
+            }
+        }
+
+        function check_place() {
+            var pattern = /^[a-zA-Z]*$/;
+            var place = $("#form_place").val();
+            if (pattern.test(place) && place !== '') {
+                $("#place_error_message").hide();
+                $("#form_place").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#place_error_message").html("Should contain only Characters");
+                $("#place_error_message").show();
+                $("#form_place").css("border-bottom","2px solid #F90A0A");
+                error_place = true;
+            }
+        }
+
+
+        $("#Source_form").submit(function() {
+            error_name = false;
+            error_id = false;
+            error_type = false;
+            error_place = false;
+
+            check_name();
+            check_id();
+            check_type();
+            check_place();
+
+            if (error_name === false && error_id === false && error_type === false && error_place === false ) {
+                alert("Source Successfull");
+                return true;
+            } else {
+                alert("Please Fill the form Correctly");
+                return false;
+            }
+
+
+        });
+    });
+</script>
+</body>
+</html>
+
+
